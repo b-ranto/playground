@@ -1,0 +1,14 @@
+Simple program for translation.
+Currently only one foreign language is supported (CZ <-> EN).
+The data file is modified version of this GNU/FDL dictionary: http://slovnik.zcu.cz/
+New version is under development.
+Features:
+- uses posix mmap to speed up search - <3 ms per search on c2d
+- optimized for multiple searches
+- uses rather universal data format (slightly modified version of regular GNU/FDL dictionaries)
+
+In order to compile and run use cmake, make and conv.sh:
+cmake .
+make
+./conv.sh
+./src/slovnik

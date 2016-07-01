@@ -1,0 +1,78 @@
+#! /usr/bin/env bash
+
+function show_help() {
+	echo -e "Usage: slovnik [switch1 switch2 ...] word1"
+	echo -e "  -e\texact match"
+	echo -e "  -r\treverse translation"
+}
+
+function load_db() {
+	test -f "$_db" && return
+	echo "Downloading and initiating the DB"
+	wget http://slovnik.zcu.cz/files/slovnik_data.txt -O /tmp/slovnik.txt
+	mkdir -p "$(dirname $_db)"
+	cat /tmp/slovnik.txt |grep -v '#' --binary-files=text | cut -f 1,2 -s| iconv -f ISO88592 -t ASCII//TRANSLIT | tr '[:upper:]' '[:lower:]' | LC_ALL=C awk -F '\t' '{print $1 "\t" $2}' | LC_ALL=C sort > "$_db"
+}
+
+_db="$HOME/.local/share/slovnik/slovnik.txt"
+_word=""
+_exact_match=""
+_reverse_match=""
+
+load_db
+
+while true; do
+	getopts ":ersh" _opt || eval _opt=\$$OPTIND
+	case "$_opt" in
+	e)
+		_exact_match="true"
+		;;
+	r)
+		_reverse_match="true"
+		;;
+	s)
+		_start_match="true"
+		;;
+	h)
+		show_help
+		exit 0
+		;;
+	\?)
+		show_help
+		exit 1
+		;;
+	"")
+		# Nothing to parse
+		break
+		;;
+	*)
+		_word="$_opt"
+		OPTIND=$((OPTIND+1))
+		;;
+	esac
+done
+
+if test -z "$_word"; then
+	show_help
+	exit 1
+fi
+
+if test -n "$_reverse_match"; then
+	if test -n "$_exact_match"; then
+		_re="\t$_word$"
+	elif test -n "$_start_match"; then
+		_re="\t$_word"
+	else
+		_re="\t.*$_word"
+	fi
+	grep -P "$_re" "$_db" | awk -F'\t' '{print $2 "\t" $1}' | sort
+else
+	if test -n "$_exact_match"; then
+		_re="^$_word\t"
+	elif test -n "$_start_match"; then
+		_re="^$_word.*\t"
+	else
+		_re="$_word.*\t"
+	fi
+	grep -P "$_re" "$_db"
+fi

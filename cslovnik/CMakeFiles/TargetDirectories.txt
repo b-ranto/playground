@@ -1,0 +1,13 @@
+/home/branto/Slovnik/CMakeFiles/install.dir
+/home/branto/Slovnik/CMakeFiles/list_install_components.dir
+/home/branto/Slovnik/CMakeFiles/install/strip.dir
+/home/branto/Slovnik/CMakeFiles/install/local.dir
+/home/branto/Slovnik/CMakeFiles/rebuild_cache.dir
+/home/branto/Slovnik/CMakeFiles/edit_cache.dir
+/home/branto/Slovnik/src/CMakeFiles/install.dir
+/home/branto/Slovnik/src/CMakeFiles/list_install_components.dir
+/home/branto/Slovnik/src/CMakeFiles/rebuild_cache.dir
+/home/branto/Slovnik/src/CMakeFiles/slovnik.dir
+/home/branto/Slovnik/src/CMakeFiles/install/strip.dir
+/home/branto/Slovnik/src/CMakeFiles/install/local.dir
+/home/branto/Slovnik/src/CMakeFiles/edit_cache.dir

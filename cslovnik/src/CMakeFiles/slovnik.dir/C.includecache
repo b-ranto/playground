@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/branto/Slovnik/src/main.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+errno.h
+-
+sys/mman.h
+-
+string.h
+-
+fcntl.h
+-
+sys/uio.h
+-
+limits.h
+-
+

@@ -1,0 +1,1 @@
+/usr/bin/cc  -O3   CMakeFiles/slovnik.dir/main.c.o  -o slovnik -rdynamic 
